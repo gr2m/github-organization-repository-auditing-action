@@ -14,7 +14,9 @@
   "author": "Gregor Martynus (https://twitter.com/gr2m)",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.2.7"
+    "@actions/core": "^1.2.7",
+    "dotenv": "^8.2.0",
+    "octokit": "^1.0.3"
   },
   "devDependencies": {
     "@semantic-release/git": "^9.0.0",
