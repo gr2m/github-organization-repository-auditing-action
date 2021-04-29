@@ -28,12 +28,16 @@ Now create a GitHub Action workflow file at `.github/workflows/audit.yml` with t
 
 ## Usage
 
+You can run the action on a [schedule](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule) and manually using the [`workflow_dispatch` event](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch)
+
 ```yml
 name: Audit
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    # Every day at 4am pacific time
+    - cron: 0 12 * * *
+  # manual trigger
+  workflow_dispatch: {}
 
 jobs:
   sayHelloWorld:
