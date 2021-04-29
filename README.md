@@ -50,8 +50,46 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       # use the repositories JSON output
-      run: |
+      - run: |
           echo '${{ steps.audit.outputs.repositories }}'
+```
+
+Use the action to write the JSON output to a logfile, together with a timestamp
+
+```yml
+name: Audit
+on:
+  schedule:
+    # Every day at 4am pacific time
+    - cron: 0 12 * * *
+  # manual trigger
+  workflow_dispatch: {}
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the current repository
+      - uses: actions/checkout@v2
+      # audit all organization repositories
+      - uses: gr2m/github-organization-repository-auditing-action@v1.x
+        id: audit
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+      - name: Get current timestamp
+        run: echo "::set-output name=timestamp::`date -u +"%Y-%m-%dT%H:%M:%SZ"`"
+        id: timestamp
+      - name: write to audit.ndjson.log
+        run: |
+          echo '{"time": "${{ steps.timestamp.outputs.timestamp }}", "repositories": ${{ steps.audit.outputs.repositories }} }' >> audit.ndjson.log
+      # commit the change
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add audit.ndjson.log
+          git commit audit.ndjson.log -m "log update"
+          git push
 ```
 
 ## How it works
