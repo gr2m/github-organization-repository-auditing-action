@@ -11,13 +11,11 @@ jobs:
           node-version: 14
       - run: "npm ci"
       - run: "npm run build"
-      - name: "Minimal README example"
+      - name: "README example"
         uses: ./
-        id: hello_world
-      - name: "README example with custom greeting"
-        uses: ./
-        id: hello_world_greeting
-        with:
-          greeting: "Gregor"
-      - run: node -e 'assert.equal("${{ steps.hello_world.outputs.greeting }}", "Hello, world!")'
-      - run: node -e 'assert.equal("${{ steps.hello_world_greeting.outputs.greeting }}", "Hello, Gregor!")'
+        id: audit
+        env:
+          APP_ID: ${{ secrets.OPENCONTOSO_APP_ID }}
+          PRIVATE_KEY: ${{ secrets.OPENCONTOSO_PRIVATE_KEY }}
+      - run: |
+          echo '${{ steps.audit.outputs.repositories }}'

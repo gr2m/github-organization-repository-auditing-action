@@ -1,16 +1,11 @@
-name: Hello, world! (JS)
-description: "A simple GitHub Action written in JavaScript"
+name: Organization Repository Audit
+description: "Audit access to all repositories across an organization"
 branding:
   icon: "clipboard"
   color: yellow
-inputs:
-  greeting:
-    description: "Custom media type in the Accept header"
-    required: false
-    default: "world"
 outputs:
-  greeting:
-    description: "The full greeting text"
+  repositories:
+    description: "JSON string for the audited repositories"
 runs:
   using: "node12"
   main: "dist/index.js"
