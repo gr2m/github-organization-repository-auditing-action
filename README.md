@@ -2,7 +2,7 @@
 
 > A simple GitHub Action written in JavaScript
 
-[![Build Status](https://github.com/gr2m/hello-world-js-action/actions/workflows/test.yml/badge.svg)](https://github.com/gr2m/hello-world-js-action/actions/workflows/test.yml)
+[![Build Status](https://github.com/gr2m/github-organization-repository-auditing-action/actions/workflows/test.yml/badge.svg)](https://github.com/gr2m/github-organization-repository-auditing-action/actions/workflows/test.yml)
 
 ## Usage
 
@@ -17,7 +17,7 @@ jobs:
   sayHelloWorld:
     runs-on: ubuntu-latest
     steps:
-      - uses: gr2m/hello-world-js-action@v1.x
+      - uses: gr2m/github-organization-repository-auditing-action@v1.x
 ```
 
 Customize greeting
@@ -33,7 +33,7 @@ jobs:
   sayHelloWorld:
     runs-on: ubuntu-latest
     steps:
-      - uses: gr2m/hello-world-js-action@v1.x
+      - uses: gr2m/github-organization-repository-auditing-action@v1.x
         with:
           greeting: Gregor
 ```
@@ -42,7 +42,7 @@ jobs:
 
 Recommended reading: The official "[Creating a JavaScript action](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action)" guide.
 
-`gr2m/hello-world-js-action` does the following
+`gr2m/github-organization-repository-auditing-action` does the following
 
 1. It logs a "Hello, world!" to the output
 2. It uses the [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core) module to showcase how to use dependencies
@@ -52,7 +52,7 @@ Recommended reading: The official "[Creating a JavaScript action](https://docs.g
 
 The most important learning of using Node to create a GitHub Action is that you cannot require/import dependencies. When someone uses your action as part of their workflow, your action's dependencies are not automatically installed. Hence the build step using `@vercel/ncc`.
 
-**Bonus**: This action is releasing automatically to GitHub using [`semantic-release`](https://github.com/semantic-release). It also pushes updates to the `v1.x` branch, which you can reliably depend on in your GitHub workflow (`uses: gr2m/hello-world-js-action@v1.x`). If there should ever be a breaking release, I'll create a `v2.x` branch, etc.
+**Bonus**: This action is releasing automatically to GitHub using [`semantic-release`](https://github.com/semantic-release). It also pushes updates to the `v1.x` branch, which you can reliably depend on in your GitHub workflow (`uses: gr2m/github-organization-repository-auditing-action@v1.x`). If there should ever be a breaking release, I'll create a `v2.x` branch, etc.
 
 ## License
 
