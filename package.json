@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-js-action",
+  "name": "github-organization-repository-auditing-action",
   "version": "1.0.0",
   "private": true,
   "description": "A simple GitHub Action written in JavaScript",
@@ -7,14 +7,16 @@
   "scripts": {
     "build": "ncc build index.js -o dist"
   },
-  "repository": "github:gr2m/hello-world-js-action",
+  "repository": "github:gr2m/github-organization-repository-auditing-action",
   "keywords": [
     "github-action"
   ],
   "author": "Gregor Martynus (https://twitter.com/gr2m)",
   "license": "ISC",
   "dependencies": {
-    "@actions/core": "^1.2.7"
+    "@actions/core": "^1.2.7",
+    "dotenv": "^8.2.0",
+    "octokit": "^1.0.3"
   },
   "devDependencies": {
     "@semantic-release/git": "^9.0.0",
