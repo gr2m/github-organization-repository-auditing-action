@@ -1,8 +1,8 @@
 name: Organization Repository Audit
 description: "Audit access to all repositories across an organization"
 branding:
-  icon: "clipboard"
-  color: yellow
+  icon: "archive"
+  color: purple
 outputs:
   repositories:
     description: "JSON string for the audited repositories"
