@@ -1,4 +1,5 @@
-on: [push]
+"on":
+  - push
 name: Test
 jobs:
   readmeExamples:
@@ -8,10 +9,10 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v2
         with:
-          node-version: 14
-      - run: "npm ci"
-      - run: "npm run build"
-      - name: "README example"
+          node-version: lts/*
+      - run: npm ci
+      - run: npm run build
+      - name: README example
         uses: ./
         id: audit
         env:
