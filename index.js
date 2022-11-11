@@ -16,19 +16,20 @@ async function run() {
 
   const repositories = [];
   for await (const { octokit, repository } of app.eachRepository.iterator()) {
-    core.info(`Auditing ${repository.full_name}`);
+    core.startGroup(`Auditing ${repository.full_name}`);
 
-    const teams = await octokit.paginate(octokit.rest.repos.listTeams, {
+    const collaborators = await octokit.paginate(octokit.rest.repos.listCollaborators, {
       owner: repository.owner.login,
       repo: repository.name,
       per_page: 100,
     });
 
-    for (const team of teams) {
-      core.info(`- ${team.name}: ${normalizePermission(team.permissions)}`);
+    for (const collaborator of collaborators) {
+      core.info(`- ${collaborator.login}: ${normalizePermission(collaborator.permissions)}`);
     }
-
-    repositories.push(toLogItem(repository, teams));
+    
+    repositories.push(toLogItem(repository, collaborators));
+    core.endGroup();
   }
 
   core.setOutput("repositories", JSON.stringify(repositories));
@@ -55,18 +56,16 @@ function normalizePermission(permissions) {
  * @param {import("@octokit/openapi-types").components["schemas"]["repository"]} repository
  * @param {import("@octokit/openapi-types").components["schemas"]["team"][]} teams
  */
-function toLogItem(repository, teams) {
+function toLogItem(repository, collaborators) {
   return {
     id: repository.id,
     name: repository.name,
-    teams: teams.map((team) => {
+    collaborators: collaborators.map((collaborator) => {
       return {
-        id: team.id,
-        slug: team.slug,
-        name: team.name,
+        login: collaborator.login,
         // team.permissions is currently missing in types,
         // see https://github.com/github/rest-api-description/issues/289
-        permission: normalizePermission(team.permissions),
+        permission: normalizePermission(collaborator.permissions),
       };
     }),
   };

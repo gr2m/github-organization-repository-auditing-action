@@ -1,6 +1,6 @@
-# Hello World Action
+# GitHub Repository Auditing Action
 
-> A simple GitHub Action written in JavaScript
+> An action to audit all repository collaborators and their permissions
 
 [![Build Status](https://github.com/gr2m/github-organization-repository-auditing-action/actions/workflows/test.yml/badge.svg)](https://github.com/gr2m/github-organization-repository-auditing-action/actions/workflows/test.yml)
 
@@ -94,7 +94,7 @@ jobs:
 
 ## How it works
 
-This action is using the GitHub App SDK from [`octokit`](https://github.com/octokit/octokit.js/#app-client). It iterates through all repositories the app is installed an, loads all teams with their permissions, and writes a resulting `repositories` array to the GitHub Action step output using [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core).
+This action is using the GitHub App SDK from [`octokit`](https://github.com/octokit/octokit.js/#app-client). It iterates through all repositories the app is installed an, loads all collaborators with their permissions, and writes a resulting `repositories` array to the GitHub Action step output using [`@actions/core`](https://github.com/actions/toolkit/tree/main/packages/core).
 
 The entire code is in [`index.js`](index.js)
 
